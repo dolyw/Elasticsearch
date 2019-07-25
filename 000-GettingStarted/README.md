@@ -29,29 +29,29 @@
 
 一般情况下，我们都会通过一个可视化的工具来查看`ES`的运行状态和数据。这个工具我们一般选择[Head](https://github.com/mobz/elasticsearch-head)，`Elasticsearch-Head`依赖于`Node.js`，需要安装`Node.js`，查看`Github`介绍，该工具能直接对`Elasticsearch`的数据进行增删改查，因此存在安全性的问题，建议生产环境下不要使用该插件，`Node.js`版本必须`requires node >= 6.0`，简单的菜鸟教程安装就行:[https://www.runoob.com/nodejs/nodejs-install-setup.html](https://www.runoob.com/nodejs/nodejs-install-setup.html)，我Node.js环境的很早就已经安装了，执行下面命令先安装`grunt`
 
-```js
+```base
 npm install -g grunt-cli
 ```
 
 安装完成查看版本
 
-```js
+```base
 grunt -version
 ```
 
 显示版本号OK
 
-```js
+```base
 grunt-cli v1.3.2
 ```
 
 去[Github](https://github.com/mobz/elasticsearch-head)下载`Elasticsearch-Head`工具，解压到你的`Elasticsearch`根路径下`D:\Tools\elasticsearch-7.2.0\elasticsearch-head-master`，修改`Gruntfile.js`配置文件，如下添加`hostname: '*'`
 
-```
+```base
 connect: {
 	server: {
 		options: {
-            hostname: '*',
+			hostname: '*',
 			port: 9100,
 			base: '.',
 			keepalive: true
@@ -62,7 +62,7 @@ connect: {
 
 然后在`D:\Tools\elasticsearch-7.2.0\elasticsearch-head-master`目录先安装下启动运行`Head`插件
 
-```
+```javascript
 npm install
 grunt server or npm run start
 ```
