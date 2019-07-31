@@ -1,6 +1,21 @@
-# Elasticsearch-Docker
+# Elasticsearch
 
-> A Elasticsearch-Docker Project
+> A Elasticsearch Project
+
+#### 完成进度
+
+- [x] 简单了解`Elasticsearch`
+- [x] 安装本地`Elasticsearch`，安装本地`Elasticsearch-Head`，本地`Elasticsearch`集群搭建
+- [ ] `SpringBoot`整合本地ES的三种方式(`API`、`REST Client`、`Data-ES`)
+- [ ] `Elasticsearch`分词插件，拼音插件安装测试
+- [ ] `Docker`搭建`Elasticsearch`，`Elasticsearch`集群
+- [ ] `SpringBoot`连接`Docker`版`Elasticsearch`
+- [ ] ~~待补充...~~
+
+#### 项目目录
+
+* 简单了解`Elasticsearch`:[https://github.com/dolyw/MyDocs/blob/master/Project/Elasticsearch/000-GettingStarted.md](https://github.com/dolyw/MyDocs/blob/master/Project/Elasticsearch/000-GettingStarted.md)
+* 安装本地`Elasticsearch`，安装本地`Elasticsearch-Head`，本地`Elasticsearch`集群搭建:[https://github.com/dolyw/MyDocs/blob/master/Project/Elasticsearch/001-LocalInstallation.md](https://github.com/dolyw/MyDocs/blob/master/Project/Elasticsearch/001-LocalInstallation.md)
 
 #### 项目介绍
 
