@@ -54,6 +54,7 @@
 
 ```xml
 <elasticsearch.version>7.2.0</elasticsearch.version>
+
 <!-- Java Low Level REST Client -->
 <dependency>
     <groupId>org.elasticsearch.client</groupId>
@@ -70,6 +71,23 @@
 ```
 
 * 配置文件
+
+```yml
+server:
+    port: 8080
+
+spring:
+    thymeleaf:
+        # 开发时关闭缓存不然没法看到实时页面
+        cache: false
+        # 启用不严格检查
+        mode: LEGACYHTML5
+
+# Elasticsearch配置
+elasticsearch:
+    hostname: 127.0.0.1
+    port: 9500
+```
 
 ```java
 @Configuration
