@@ -28,25 +28,21 @@
 
 #### 预览图示
 
-```
-查询
-```
-![聊天图示](https://docs.dolyw.com/Project/Elasticsearch/image/20190815001.gif)
+* 查询
 
-```
-添加
-```
-![聊天图示](https://docs.dolyw.com/Project/Elasticsearch/image/20190815002.gif)
+![查询](https://docs.dolyw.com/Project/Elasticsearch/image/20190815001.gif)
 
-```
-修改
-```
-![聊天图示](https://docs.dolyw.com/Project/Elasticsearch/image/20190815003.gif)
+* 添加
 
-```
-删除
-```
-![聊天图示](https://docs.dolyw.com/Project/Elasticsearch/image/20190815004.gif)
+![添加](https://docs.dolyw.com/Project/Elasticsearch/image/20190815002.gif)
+
+* 修改
+
+![修改](https://docs.dolyw.com/Project/Elasticsearch/image/20190815003.gif)
+
+* 删除
+
+![删除](https://docs.dolyw.com/Project/Elasticsearch/image/20190815004.gif)
 
 #### 基础架子搭建
 
@@ -566,7 +562,7 @@ public class HighLevelRestController {
 
 ##### 接口都实现了，实际请查看代码，最后用`Vue` + `ElementUI`写了一个前端界面
 
-* Socket实现网页common.html
+* 界面实现网页common.html
 
 ```html
 <!DOCTYPE html>
@@ -604,7 +600,7 @@ public class HighLevelRestController {
 </html>
 ```
 
-* 实现网页index.html
+* 界面实现网页index.html
 
 ```html
 <!DOCTYPE html>
@@ -700,13 +696,13 @@ public class HighLevelRestController {
 		</el-table>
 		<div align="right" style="margin-top: 20px;">
 			<el-pagination
-					:current-page="searchForm.page"
-					:page-sizes="[1, 8, 16, 32, 48]"
-					:page-size="searchForm.rows"
-					:total="totalCount"
-					layout="total, sizes, prev, pager, next, jumper"
-					@size-change="handleSizeChange"
-					@current-change="handleCurrentChange"
+				:current-page="searchForm.page"
+				:page-sizes="[1, 8, 16, 32, 48]"
+				:page-size="searchForm.rows"
+				:total="totalCount"
+				layout="total, sizes, prev, pager, next, jumper"
+				@size-change="handleSizeChange"
+				@current-change="handleCurrentChange"
 			/>
 		</div>
 	</el-card>
@@ -781,10 +777,10 @@ public class HighLevelRestController {
             queryES: function() {
                 axios.get('/high/es').then(res => {
                     console.log(res);
-            }).catch(err => {
+                }).catch(err => {
                     console.log(err);
-                this.$message.error('查询失败');
-            });
+                    this.$message.error('查询失败');
+                });
             },
             // 每页条数改变
             handleSizeChange: function(rows) {
@@ -818,10 +814,10 @@ public class HighLevelRestController {
                     var data = res.data.data;
                     this.tableData = data.data;
                     this.totalCount = data.count;
-				}).catch(err => {
-					console.log(err);
-					this.$message.error('查询失败');
-				}).then(() => {
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error('查询失败');
+                }).then(() => {
                     this.tableLoading = false;
             	});
             },
@@ -829,11 +825,11 @@ public class HighLevelRestController {
             preAdd: function() {
                 this.genLoading = true;
                 // this.$nextTick Dom渲染完执行
-				this.$nextTick(() => {
-				    this.title = "添加";
-				    this.bookDto = {};
-				    this.dialogVisible = true;
-				    this.genLoading = false;
+                this.$nextTick(() => {
+                    this.title = "添加";
+                    this.bookDto = {};
+                    this.dialogVisible = true;
+                    this.genLoading = false;
                 });
             },
             // 预修改
@@ -844,12 +840,12 @@ public class HighLevelRestController {
                 axios.get('/high/book/' + row.id).then(res => {
                     // console.log(res);
                     this.bookDto = res.data.data;
-				}).catch(err => {
-					console.log(err);
-					this.$message.error('查询失败');
-				}).then(() => {
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error('查询失败');
+                }).then(() => {
                     this.genLoading = false;
-				});
+                });
             },
             // 添加或者修改
             deal: function() {
@@ -858,49 +854,45 @@ public class HighLevelRestController {
                     // ID存在修改
                     axios.put('/high/book', this.bookDto).then(res => {
                         if (res.data.code == 200) {
-							this.$message({
-								message: res.data.msg,
-								type: 'success'
-							});
-                        	this.dialogVisible = false;
-							// 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
-                        	this.tableLoading = true;
-							setTimeout(() => {
-                                this.list(this.searchForm);
-							}, 1000);
-						} else {
-                        	this.$message.error('修改失败');
-						}
-					}).catch(err => {
-						console.log(err);
-						this.$message.error('修改失败');
-					}).then(() => {
-						this.genLoading = false;
-					});
-				} else {
+                            this.$message({
+                                message: res.data.msg,
+                                type: 'success'
+                            });
+                            this.dialogVisible = false;
+                            // 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
+                            this.tableLoading = true;
+                            setTimeout(() => {this.list(this.searchForm);}, 1000);
+                        } else {
+                            this.$message.error('修改失败');
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error('修改失败');
+                    }).then(() => {
+                        this.genLoading = false;
+                    });
+                } else {
                     // ID不存在添加
-					axios.post('/high/book', this.bookDto).then(res => {
+                    axios.post('/high/book', this.bookDto).then(res => {
                         if (res.data.code == 200) {
-							this.$message({
-								message: res.data.msg,
-								type: 'success'
-							});
-							this.dialogVisible = false;
-                        	// 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
-                        	this.tableLoading = true;
-							setTimeout(() => {
-								this.list(this.searchForm);
-							}, 1000);
-						} else {
-							this.$message.error('添加失败');
-						}
-					}).catch(err => {
-						console.log(err);
-						this.$message.error('添加失败');
-					}).then(() => {
-						this.genLoading = false;
-					});
-				}
+                            this.$message({
+                                message: res.data.msg,
+                                type: 'success'
+                            });
+                            this.dialogVisible = false;
+                            // 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
+                            this.tableLoading = true;
+                            setTimeout(() => {this.list(this.searchForm);}, 1000);
+                        } else {
+                            this.$message.error('添加失败');
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error('添加失败');
+                    }).then(() => {
+                        this.genLoading = false;
+                    });
+                }
             },
             // 删除
             delById: function (row) {
@@ -911,31 +903,29 @@ public class HighLevelRestController {
                     type: 'warning'
                 }).then(() => {
                     axios.delete('/high/book/' + row.id).then(res => {
-						if (res.data.code == 200) {
-							this.$message({
-								message: res.data.msg,
-								type: 'success'
-							});
-                    		// 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
-                    		this.tableLoading = true;
-							setTimeout(() => {
-								this.list(this.searchForm);
-							}, 1000);
-						} else {
-							this.$message.error('删除失败');
-						}
-					}).catch(err => {
-						console.log(err);
-						this.$message.error('删除失败');
-					}).then(() => {
-						this.genLoading = false;
-					});
-            	}).catch(() => {
+                        if (res.data.code == 200) {
+                            this.$message({
+                                message: res.data.msg, 
+                                type: 'success'
+                            });
+                            // 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
+                            this.tableLoading = true;
+                            setTimeout(() => {this.list(this.searchForm);}, 1000);
+                        } else {
+                            this.$message.error('删除失败');
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error('删除失败');
+                    }).then(() => {
+                        this.genLoading = false;
+                    });
+                }).catch(() => {
                     this.genLoading = false;
-				});
+                });
             }
         }
-    })
+    });
     /*]]>*/
 </script>
 

@@ -91,13 +91,13 @@
 		</el-table>
 		<div align="right" style="margin-top: 20px;">
 			<el-pagination
-					:current-page="searchForm.page"
-					:page-sizes="[1, 8, 16, 32, 48]"
-					:page-size="searchForm.rows"
-					:total="totalCount"
-					layout="total, sizes, prev, pager, next, jumper"
-					@size-change="handleSizeChange"
-					@current-change="handleCurrentChange"
+				:current-page="searchForm.page"
+				:page-sizes="[1, 8, 16, 32, 48]"
+				:page-size="searchForm.rows"
+				:total="totalCount"
+				layout="total, sizes, prev, pager, next, jumper"
+				@size-change="handleSizeChange"
+				@current-change="handleCurrentChange"
 			/>
 		</div>
 	</el-card>
@@ -172,10 +172,10 @@
             queryES: function() {
                 axios.get('/high/es').then(res => {
                     console.log(res);
-            }).catch(err => {
-                    console.log(err);
-                this.$message.error('查询失败');
-            });
+				}).catch(err => {
+					console.log(err);
+					this.$message.error('查询失败');
+				});
             },
             // 每页条数改变
             handleSizeChange: function(rows) {
@@ -209,10 +209,10 @@
                     var data = res.data.data;
                     this.tableData = data.data;
                     this.totalCount = data.count;
-				}).catch(err => {
+                }).catch(err => {
 					console.log(err);
 					this.$message.error('查询失败');
-				}).then(() => {
+                }).then(() => {
                     this.tableLoading = false;
             	});
             },
@@ -225,7 +225,7 @@
 				    this.bookDto = {};
 				    this.dialogVisible = true;
 				    this.genLoading = false;
-                });
+				});
             },
             // 预修改
             preById: function(row) {
@@ -234,13 +234,13 @@
                 this.dialogVisible = true;
                 axios.get('/high/book/' + row.id).then(res => {
                     // console.log(res);
-                    this.bookDto = res.data.data;
-				}).catch(err => {
-					console.log(err);
-					this.$message.error('查询失败');
-				}).then(() => {
+					this.bookDto = res.data.data;
+                }).catch(err => {
+                    console.log(err);
+                    this.$message.error('查询失败');
+                }).then(() => {
                     this.genLoading = false;
-				});
+                });
             },
             // 添加或者修改
             deal: function() {
@@ -249,50 +249,46 @@
                     // ID存在修改
                     axios.put('/high/book', this.bookDto).then(res => {
                         if (res.data.code == 200) {
-							this.$message({
+                            this.$message({
 								message: res.data.msg,
 								type: 'success'
-							});
-                        	this.dialogVisible = false;
-							// 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
-                        	this.tableLoading = true;
-							setTimeout(() => {
-                                this.list(this.searchForm);
-							}, 1000);
-						} else {
-                        	this.$message.error('修改失败');
-						}
-					}).catch(err => {
-						console.log(err);
-						this.$message.error('修改失败');
-					}).then(() => {
-						this.genLoading = false;
-					});
-				} else {
+                            });
+                            this.dialogVisible = false;
+                            // 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
+                            this.tableLoading = true;
+                            setTimeout(() => {this.list(this.searchForm);}, 1000);
+                        } else {
+                            this.$message.error('修改失败');
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error('修改失败');
+                    }).then(() => {
+                        this.genLoading = false;
+                    });
+                } else {
                     // ID不存在添加
-					axios.post('/high/book', this.bookDto).then(res => {
+                    axios.post('/high/book', this.bookDto).then(res => {
                         if (res.data.code == 200) {
-							this.$message({
+                            this.$message({
 								message: res.data.msg,
 								type: 'success'
-							});
-							this.dialogVisible = false;
-                        	// 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
-                        	this.tableLoading = true;
-							setTimeout(() => {
-								this.list(this.searchForm);
-							}, 1000);
-						} else {
-							this.$message.error('添加失败');
-						}
-					}).catch(err => {
-						console.log(err);
-						this.$message.error('添加失败');
-					}).then(() => {
-						this.genLoading = false;
-					});
-				}
-            },
+                            });
+                            this.dialogVisible = false;
+                            // 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
+                            this.tableLoading = true;
+                            setTimeout(() => {this.list(this.searchForm);}, 1000);
+                        } else {
+                            this.$message.error('添加失败');
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error('添加失败');
+                    }).then(() => {
+                        this.genLoading = false;
+                    });
+                }
+			},
             // 删除
             delById: function (row) {
                 this.genLoading = true;
@@ -302,31 +298,29 @@
                     type: 'warning'
                 }).then(() => {
                     axios.delete('/high/book/' + row.id).then(res => {
-						if (res.data.code == 200) {
-							this.$message({
+                        if (res.data.code == 200) {
+                            this.$message({
 								message: res.data.msg,
 								type: 'success'
-							});
-                    		// 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
-                    		this.tableLoading = true;
-							setTimeout(() => {
-								this.list(this.searchForm);
-							}, 1000);
-						} else {
-							this.$message.error('删除失败');
-						}
-					}).catch(err => {
-						console.log(err);
-						this.$message.error('删除失败');
-					}).then(() => {
-						this.genLoading = false;
-					});
-            	}).catch(() => {
+                            });
+                            // 列表查询必须慢点，ES没有事务性，查询太快，数据还没更新
+                            this.tableLoading = true;
+                            setTimeout(() => {this.list(this.searchForm);}, 1000);
+                        } else {
+                            this.$message.error('删除失败');
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                        this.$message.error('删除失败');
+                    }).then(() => {
+                        this.genLoading = false;
+                    });
+                }).catch(() => {
                     this.genLoading = false;
-				});
+                });
             }
         }
-    })
+    });
     /*]]>*/
 </script>
 
