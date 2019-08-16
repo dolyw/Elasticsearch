@@ -12,7 +12,7 @@
 
 ##### (四)`SpringBoot`整合`Elasticsearch`的方式(`TransportClient`、`Data-ES`、`Elasticsearch SQL`、`REST Client`):[https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local](https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local)
 
-##### (五)`Docker`搭建`Elasticsearch`，`Elasticsearch`集群:[]()
+##### (五)`Docker`搭建`Elasticsearch`，`Elasticsearch`集群，以及`IK`分词插件和`拼音`分词插件:[]()
 
 ##### (六)`SpringBoot`连接`Docker`版`Elasticsearch`:[]()
 
@@ -22,7 +22,7 @@
 - [x] 安装本地`Elasticsearch`，安装本地`Elasticsearch-Head`，本地`Elasticsearch`集群搭建
 - [x] 安装本地`Elasticsearch`的`IK`分词插件和`拼音`分词插件
 - [x] `SpringBoot`整合`Elasticsearch`的方式(`TransportClient`、`Data-ES`、`Elasticsearch SQL`、`REST Client`)
-- [ ] `Docker`搭建`Elasticsearch`，`Elasticsearch`集群
+- [ ] `Docker`搭建`Elasticsearch`，`Elasticsearch`集群，以及`IK`分词插件和`拼音`分词插件
 - [ ] `SpringBoot`连接`Docker`版`Elasticsearch`
 - [ ] ~~待补充...~~
 
