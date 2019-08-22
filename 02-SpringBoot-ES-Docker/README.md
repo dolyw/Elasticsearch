@@ -10,7 +10,11 @@
 
 SpringBoot整合ES的方式(TransportClient、Data-ES、Elasticsearch SQL、REST Client)
 
-详细的过程查看: [https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local](https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local)
+详细的过程查看: 
+
+* SpringBoot整合Elasticsearch的方式(TransportClient、Data-ES、Elasticsearch SQL、REST Client):[https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local](https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local)
+
+* Docker环境下搭建Elasticsearch，Elasticsearch集群，Elasticsearch-Head以及IK分词插件和拼音分词插件:[https://github.com/dolyw/DockerStudy/blob/master/02-StartUsing/Elasticsearch.md](https://github.com/dolyw/DockerStudy/blob/master/02-StartUsing/Elasticsearch.md)
 
 这个项目只是测试Docker版本的Elasticsearch是否安装无误
 
