@@ -4,8 +4,8 @@
 
 #### 项目介绍
 
-##### (一)简单了解`Elasticsearch`:[https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/000-GettingStarted.md](https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/000-GettingStarted.md)
+##### (一)简单了解Elasticsearch:[https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/000-GettingStarted.md](https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/000-GettingStarted.md)
 
-##### (二)安装本地`Elasticsearch`，安装本地`Elasticsearch-Head`，本地`Elasticsearch`集群搭建:[https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/001-LocalInstallation.md](https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/001-LocalInstallation.md)
+##### (二)安装本地Elasticsearch，安装本地Elasticsearch-Head，本地Elasticsearch集群搭建:[https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/001-LocalInstallation.md](https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/001-LocalInstallation.md)
 
-##### (三)安装本地`Elasticsearch`的`IK`分词插件和`拼音`分词插件:[https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/002-LocalInstallationIK.md](https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/002-LocalInstallationIK.md)
+##### (三)安装本地Elasticsearch的IK分词插件和拼音分词插件:[https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/002-LocalInstallationIK.md](https://github.com/dolyw/Elasticsearch/blob/master/00-GettingStarted/002-LocalInstallationIK.md)

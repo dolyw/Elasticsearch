@@ -4,15 +4,15 @@
 
 #### 软件架构
 
-1. `SpringBoot` + `REST Client`
+1. SpringBoot + REST Client
 
 #### 项目介绍
 
-`SpringBoot`整合ES的方式(`TransportClient`、`Data-ES`、`Elasticsearch SQL`、`REST Client`)
+SpringBoot整合ES的方式(TransportClient、Data-ES、Elasticsearch SQL、REST Client)
 
 详细的过程查看: [https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local](https://github.com/dolyw/Elasticsearch/tree/master/01-SpringBoot-ES-Local)
 
-这个项目只是测试Docker版本的`Elasticsearch`是否安装无误
+这个项目只是测试Docker版本的Elasticsearch是否安装无误
 
 #### 预览图示
 
