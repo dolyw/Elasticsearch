@@ -145,7 +145,7 @@ POST /_analyze
 }
 ```
 
-`IK`分词插件就这样安装成功了
+IK分词插件就这样安装成功了
 
 ### 安装本地`Elasticsearch`的拼音分词插件
 
@@ -254,13 +254,11 @@ POST /_analyze
 }
 ```
 
-`拼音`分词插件就这样安装成功了
+拼音分词插件就这样安装成功了
 
-#### 使用`IK`和`拼音`插件
+#### 使用IK和拼音插件(详细使用可以查看Github的文档)
 
-##### 建立一个新的`Index`
-
-速度会慢点(旧的索引更新方式:[https://blog.csdn.net/dm_vincent/article/details/46996021](https://blog.csdn.net/dm_vincent/article/details/46996021))
+* 创建Index，拼音分词过滤
 
 ```
 PUT /book
@@ -268,27 +266,14 @@ PUT /book
 	"settings": {
 		"analysis": {
 			"analyzer": {
-				"ik_smart_pinyin": {
-					"type": "custom",
-					"tokenizer": "ik_smart",
-					"filter": [
-						"my_pinyin",
-						"word_delimiter"
-					]
-				},
-				"ik_max_word_pinyin": {
-					"type": "custom",
-					"tokenizer": "ik_max_word",
-					"filter": [
-						"my_pinyin",
-						"word_delimiter"
-					]
+				"pinyin_analyzer": {
+					"tokenizer": "my_pinyin"
 				}
 			},
-			"filter": {
+			"tokenizer": {
 				"my_pinyin": {
 					"type": "pinyin",
-					"keep_separate_first_letter": true,
+					"keep_separate_first_letter": false,
 					"keep_full_pinyin": true,
 					"keep_original": true,
 					"limit_first_letter_length": 16,
@@ -301,41 +286,68 @@ PUT /book
 }
 ```
 
-完成返回
+返回
 
 ```
 {
-	"acknowledged": true,
-	"shards_acknowledged": false,
-	"index": "library"
+    "acknowledged": true,
+    "shards_acknowledged": true,
+    "index": "book"
 }
 ```
 
-建立后速度缓慢(unavailable_shards_exception异常)，保留
-
-##### 建立`Type`，需要在字段的`analyzer`属性填写自己的映射
+* 创建Mapping，属性使用过滤，name开启拼音分词，content开启IK分词，describe开启拼音加IK分词
 
 ```
-PUT /book/book/_mapping
+POST /book/_mapping
 {
-	"book": {
-		"properties": {
-			"id": {
-				"type": "long"
-			},
-			"name": {
-				"type": "text",
-				"analyzer": "ik_max_word"
-			},
-			"desc": {
-				"type": "text",
-				"analyzer": "ik_max_word"
+	"properties": {
+		"name": {
+			"type": "keyword",
+			"fields": {
+				"pinyin": {
+					"type": "text",
+					"store": false,
+					"term_vector": "with_offsets",
+					"analyzer": "pinyin_analyzer",
+					"boost": 10
+				}
 			}
+		},
+		"content": {
+			"type": "text",
+			"analyzer": "ik_max_word",
+			"search_analyzer": "ik_smart"
+		},
+		"describe": {
+			"type": "text",
+			"analyzer": "ik_max_word",
+			"search_analyzer": "ik_smart",
+			"fields": {
+				"pinyin": {
+					"type": "text",
+					"store": false,
+					"term_vector": "with_offsets",
+					"analyzer": "pinyin_analyzer",
+					"boost": 10
+				}
+			}
+		},
+		"id": {
+			"type": "long"
 		}
 	}
 }
 ```
 
-这样就完成了
+返回
+
+```
+{
+    "acknowledged": true
+}
+```
+
+这样Index以及属性分词就开启了
 
 ##### 注：搜索时，先查看被搜索的词被分析成什么样的数据，如果你搜索该词输入没有被分析出的参数时，是查不到的！！！

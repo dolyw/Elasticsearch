@@ -22,9 +22,14 @@ public class BookDto implements Serializable {
     private String name;
 
     /**
+     * 内容
+     */
+    private String content;
+
+    /**
      * 描述
      */
-    private String desc;
+    private String describe;
 
     /**
      * 空构造方法
@@ -34,10 +39,27 @@ public class BookDto implements Serializable {
     /**
      * 构造赋值方法
      */
-    public BookDto(Long id, String name, String desc) {
+    public BookDto(Long id, String name, String content, String describe) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.content = content;
+        this.describe = describe;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public Long getId() {
@@ -56,11 +78,4 @@ public class BookDto implements Serializable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
 }

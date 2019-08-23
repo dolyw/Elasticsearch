@@ -16,7 +16,7 @@ SpringBoot整合ES的方式(TransportClient、Data-ES、Elasticsearch SQL、REST
 
 * Docker环境下搭建Elasticsearch，Elasticsearch集群，Elasticsearch-Head以及IK分词插件和拼音分词插件:[https://github.com/dolyw/DockerStudy/blob/master/02-StartUsing/Elasticsearch.md](https://github.com/dolyw/DockerStudy/blob/master/02-StartUsing/Elasticsearch.md)
 
-这个项目只是测试Docker版本的Elasticsearch是否安装无误
+这个项目只是测试Docker版本的Elasticsearch是否安装无误，和之前本地版区别是Docker的ES版本升级到了7.3，字段添加了content，describe，之前的desc是关键字就改成了describe
 
 #### 预览图示
 

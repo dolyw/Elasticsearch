@@ -76,7 +76,8 @@
 			<el-table-column type="index" align="center" min-width="60"></el-table-column>
 			<el-table-column prop="id" label="ID" align="center" min-width="100" show-overflow-tooltip></el-table-column>
 			<el-table-column prop="name" label="名称" align="center" min-width="100" show-overflow-tooltip></el-table-column>
-			<el-table-column prop="desc" label="描述" align="center" min-width="80" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="content" label="内容" align="center" min-width="80" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="describe" label="描述" align="center" min-width="80" show-overflow-tooltip></el-table-column>
 			<!--<el-table-column prop="createTime" label="创建时间" align="center" min-width="100" show-overflow-tooltip>
 				<template slot-scope="scope">
 					{{ moment(scope.row.createTime).format('YYYY-MM-DD HH:mm:ss') }}
@@ -110,8 +111,11 @@
 			<el-form-item label="名称">
 				<el-input v-model="bookDto.name" autocomplete="off"></el-input>
 			</el-form-item>
+			<el-form-item label="内容">
+				<el-input v-model="bookDto.content" autocomplete="off"></el-input>
+			</el-form-item>
 			<el-form-item label="描述">
-				<el-input v-model="bookDto.desc" autocomplete="off"></el-input>
+				<el-input v-model="bookDto.describe" autocomplete="off"></el-input>
 			</el-form-item>
 		</el-form>
 		<div slot="footer" class="dialog-footer">
@@ -156,8 +160,10 @@
                 id: 1,
                 // 名称
                 name: '',
+                // 内容
+                content: '',
                 // 描述
-                desc: ''
+                describe: ''
             }
         },
         // 启动时就执行

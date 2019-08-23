@@ -16,13 +16,17 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.*;
+import org.elasticsearch.common.io.stream.StreamOutput;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryRewriteContext;
+import org.elasticsearch.index.query.QueryShardContext;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.sort.SortOrder;
+import org.elasticsearch.search.sort.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,11 +98,14 @@ public class HighLevelRestController {
         searchSourceBuilder.size(rows);
         // 查询条件，只有查询关键字不为空才带查询条件
         if (StringUtils.isNoneBlank(keyword)) {
-            QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, "name", "desc");
+            QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, "name", "content", "describe");
             searchSourceBuilder.query(queryBuilder);
         }
         // 排序，根据ID倒叙
-        searchSourceBuilder.sort("id", SortOrder.DESC);
+        // searchSourceBuilder.sort("id", SortOrder.DESC);
+        // 使用unmappedType，解决排序引起的all shards failed问题，详细请自行查阅资料
+        FieldSortBuilder fieldSortBuilder = SortBuilders.fieldSort("id").order(SortOrder.DESC).unmappedType("text");
+        searchSourceBuilder.sort(fieldSortBuilder);
         // SearchRequest
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.source(searchSourceBuilder);
