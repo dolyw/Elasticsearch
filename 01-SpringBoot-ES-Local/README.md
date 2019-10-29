@@ -10,21 +10,21 @@
 
 SpringBoot整合ES的方式(TransportClient、Data-ES、Elasticsearch SQL、REST Client)
 
-* TransportClient
+* **TransportClient**
 
 TransportClient即将弃用，所以这种方式不考虑
 
-* Data-ES
+* **Data-ES**
 
 Spring提供的封装的方式，好像底层也是基于TransportClient，Elasticsearch7.0后的版本不怎么支持，SpringBoot的Spring Boot Data Elasticsearch Starter最高版本2.1.7.RELEASE下载的是Spring Data Elasticsearch的3.1.5版本对应的是Elasticsearch 6.4.3版本，Spring Data Elasticsearch最新版3.1.10对应的还是Elasticsearch 6.4.3版本，我安装的是最新的Elasticsearch 7.2.0版本所以也没办法使用
 
-* Elasticsearch SQL
+* **Elasticsearch SQL**
 
 将Elasticsearch的`Query DSL`用`SQL`转换查询，早期有一个第三方的插件Elasticsearch-SQL，后来随着官方也开始做这方面，这个插件好像就没怎么更新了，有兴趣的可以查看：[https://www.cnblogs.com/jajian/p/10053504.html](https://www.cnblogs.com/jajian/p/10053504.html)
 
-* REST Client
+* **REST Client**
 
-官方推荐使用，所以我们采用这个方式，这个分为两个Low Level REST Client和High Level REST Client，Low Level REST Client是早期出的API比较简陋了，还需要自己去拼写`Query DSL`，High Level REST Client使用起来更好用，更符合面向对象的感觉，两个都使用下吧
+官方推荐使用，所以我们采用这个方式，这个分为两个**Low Level REST Client**和**High Level REST Client**，**Low Level REST Client**是早期出的API比较简陋了，还需要自己去拼写`Query DSL`，**High Level REST Client**使用起来更好用，更符合面向对象的感觉，两个都使用下吧
 
 #### 预览图示
 
@@ -44,7 +44,7 @@ Spring提供的封装的方式，好像底层也是基于TransportClient，Elast
 
 ![删除](https://docs.dolyw.com/Project/Elasticsearch/image/20190815004.gif)
 
-#### 基础架子搭建
+#### 配置代码
 
 创建一个`SpringBoot 2.1.3`的`Maven`项目，这块不再详细描述，添加如下`REST Client`依赖
 
@@ -131,9 +131,9 @@ public class RestClientConfig {
 }
 ```
 
-##### 这样就配置完成了
+* 这样就配置完成了
 
-#### 开始使用
+#### Controller入口
 
 * LowLevelRestController
 
@@ -558,9 +558,11 @@ public class HighLevelRestController {
 }
 ```
 
-##### LowLevelRestController和HighLevelRestController一对比就能看出来了，HighLevelRestController使用起来更舒服
+**LowLevelRestController**和**HighLevelRestController**一对比就能看出来了，**HighLevelRestController**使用起来更舒服
 
-##### 接口都实现了，实际请查看代码，最后用`Vue` + `ElementUI`写了一个前端界面
+接口都实现了，实际请查看代码，最后用`Vue` + `ElementUI`写了一个前端界面
+
+#### 前端界面
 
 * 界面实现网页common.html
 
@@ -936,9 +938,7 @@ public class HighLevelRestController {
 
 #### 安装教程
 
-```
-运行项目src\main\java\com\example\Application.java即可，访问http://localhost:8080即可
-```
+运行项目src\main\java\com\example\Application.java即可，访问[http://localhost:8080](http://localhost:8080)即可
 
 #### 搭建参考
 
